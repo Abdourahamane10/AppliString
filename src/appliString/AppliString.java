@@ -14,16 +14,21 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AppliString {
 
 	private JFrame frmOprationSurUne;
 	private JTextField chaine1;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldI;
+	private JTextField textFieldJ;
 	private JTextField u;
 	private JTextField chaine2;
 	private JTextField chaine3;
+	
+	private String s;
+	int i,j;
 
 	/**
 	 * Launch the application.
@@ -91,16 +96,40 @@ public class AppliString {
 		panelI.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JButton bouttonGH = new JButton("\u25B2");
+		bouttonGH.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//-------------------------------------------------
+				if(Integer.valueOf(textFieldI.getText()) < chaine1.getText().length()) {
+					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) + 1));
+				}
+				else {
+					bouttonGH.disable();
+				}
+				//-------------------------------------------------
+			}
+		});
 		panelI.add(bouttonGH);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setText("0");
-		panelI.add(textField);
-		textField.setColumns(10);
+		textFieldI = new JTextField();
+		textFieldI.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textFieldI.setHorizontalAlignment(SwingConstants.RIGHT);
+		textFieldI.setText("0");
+		panelI.add(textFieldI);
+		textFieldI.setColumns(10);
 		
 		JButton bouttonGB = new JButton("\u25BC");
+		bouttonGB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//--------------------------------------------
+				if(Integer.valueOf(textFieldI.getText()) > 0) {
+					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) - 1));
+				}
+				else {
+					bouttonGB.disable();
+				}
+				//--------------------------------------------
+			}
+		});
 		panelI.add(bouttonGB);
 		
 		JPanel panel2 = new JPanel();
@@ -117,14 +146,20 @@ public class AppliString {
 		panelJ.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JButton bouttonDH = new JButton("\u25B2");
+		bouttonDH.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//---------------------------------------------
+				//---------------------------------------------
+			}
+		});
 		panelJ.add(bouttonDH);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		textField_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_1.setText("9");
-		panelJ.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldJ = new JTextField();
+		textFieldJ.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textFieldJ.setHorizontalAlignment(SwingConstants.RIGHT);
+		textFieldJ.setText("9");
+		panelJ.add(textFieldJ);
+		textFieldJ.setColumns(10);
 		
 		JButton bouttonDB = new JButton("\u25BC");
 		panelJ.add(bouttonDB);
@@ -150,6 +185,7 @@ public class AppliString {
 		panelBC1.add(charAt, BorderLayout.WEST);
 		
 		u = new JTextField();
+		u.setEditable(false);
 		u.setText("U");
 		panelBC1.add(u, BorderLayout.CENTER);
 		u.setColumns(10);
@@ -162,6 +198,7 @@ public class AppliString {
 		panelBC2.add(substring1, BorderLayout.WEST);
 		
 		chaine2 = new JTextField();
+		chaine2.setEditable(false);
 		chaine2.setText("Un exemple de cha\u00EEne");
 		panelBC2.add(chaine2, BorderLayout.CENTER);
 		chaine2.setColumns(10);
@@ -174,6 +211,7 @@ public class AppliString {
 		panelBB.add(substring2, BorderLayout.WEST);
 		
 		chaine3 = new JTextField();
+		chaine3.setEditable(false);
 		chaine3.setText("Un exempl");
 		panelBB.add(chaine3, BorderLayout.CENTER);
 		chaine3.setColumns(10);
