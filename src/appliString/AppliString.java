@@ -111,6 +111,13 @@ public class AppliString {
 		panelI.add(bouttonGH);
 		
 		textFieldI = new JTextField();
+		textFieldI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//--------------------------------------
+				textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText())));
+				//--------------------------------------
+			}
+		});
 		textFieldI.setFont(new Font("Tahoma", Font.BOLD, 12));
 		textFieldI.setHorizontalAlignment(SwingConstants.RIGHT);
 		textFieldI.setText("0");
@@ -161,6 +168,13 @@ public class AppliString {
 		panelJ.add(bouttonDH);
 		
 		textFieldJ = new JTextField();
+		textFieldJ.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//----------------------------------------------
+				textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				//----------------------------------------------
+			}
+		});
 		textFieldJ.setFont(new Font("Tahoma", Font.BOLD, 12));
 		textFieldJ.setHorizontalAlignment(SwingConstants.RIGHT);
 		textFieldJ.setText("9");
@@ -253,6 +267,13 @@ public class AppliString {
 		panelB.setLayout(new BorderLayout(0, 0));
 		
 		chaine1 = new JTextField();
+		chaine1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//--------------------------------------------
+				chaine1.setText(String.valueOf(Integer.valueOf(chaine1.getText())));
+				//--------------------------------------------
+			}
+		});
 		chaine1.setText("Un exemple de cha\u00EEne");
 		panelB.add(chaine1);
 		chaine1.setColumns(10);
