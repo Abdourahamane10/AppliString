@@ -149,6 +149,12 @@ public class AppliString {
 		bouttonDH.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//---------------------------------------------
+				if(Integer.valueOf(textFieldJ.getText()) < chaine1.getText().length()) {
+					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) + 1));
+				}
+				else {
+					bouttonDH.disable();
+				}
 				//---------------------------------------------
 			}
 		});
@@ -162,6 +168,18 @@ public class AppliString {
 		textFieldJ.setColumns(10);
 		
 		JButton bouttonDB = new JButton("\u25BC");
+		bouttonDB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//--------------------------------------------
+				if(Integer.valueOf(textFieldJ.getText()) > 0) {
+					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) -1 ));
+				}
+				else {
+					bouttonDB.disable();
+				}
+				//--------------------------------------------
+			}
+		});
 		panelJ.add(bouttonDB);
 		
 		JPanel panelBas = new JPanel();
