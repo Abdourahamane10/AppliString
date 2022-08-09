@@ -56,7 +56,7 @@ public class AppliString {
 	
 	
 	//Méthode pour vérifier si la valeur d'un string est un entier
-	private boolean verifEntier(String s) {
+	private boolean estEntier(String s) {
 		int i = 0;
 		while(i != s.length() && Character.isDigit(s.charAt(i))) {
 			i += 1;
@@ -70,18 +70,22 @@ public class AppliString {
 	//Méthode permettant de répercuter sur la partie Résultats les modifications efectuées par l'utilisateur sur i, j ou s
 	private void percuter() {
 		s = chaine1.getText();
-		if(verifEntier(textFieldI.getText())) {
+		if(estEntier(textFieldI.getText())) {
 			i = Integer.valueOf(textFieldI.getText());
 		}
-		if(verifEntier(textFieldJ.getText())) {
+		if(estEntier(textFieldJ.getText())) {
 			j = Integer.valueOf(textFieldJ.getText());
 		}
-		if(0<=i && i<=s.length()) {
+		if(0<=i && i<s.length()) {
 			u.setText(""+s.charAt(i));
-			chaine2.setText(s.substring(i));
 		}
 		else {
 			u.setText("N/A");
+		}
+		if(0<=i && i<=s.length()) {
+			chaine2.setText(s.substring(i));
+		}
+		else {
 			chaine2.setText("N/A");
 		}
 		
@@ -140,23 +144,32 @@ public class AppliString {
 		bouttonGH.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//-------------------------------------------------
-				if(Integer.valueOf(textFieldI.getText()) < chaine1.getText().length()) {
-					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) + 1));
-					percuter();
+				if(estEntier(textFieldI.getText())) {
+					if(Integer.valueOf(textFieldI.getText()) < chaine1.getText().length()) {
+						textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) + 1));
+						percuter();
+					}
+					else {
+						bouttonGH.disable();
+					}
 				}
 				else {
 					bouttonGH.disable();
 				}
+				
 				//-------------------------------------------------
 			}
 		});
 		panelI.add(bouttonGH);
 		
 		textFieldI = new JTextField();
+		textFieldI.setText("0");
 		textFieldI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//----------------------------------------
-				textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				if(estEntier(textFieldI.getText())) {
+					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText())));
+				}
 				percuter();
 				//----------------------------------------
 			}
@@ -170,9 +183,14 @@ public class AppliString {
 		bouttonGB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//--------------------------------------------
-				if(Integer.valueOf(textFieldI.getText()) > 0) {
-					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) - 1));
-					percuter();
+				if(estEntier(textFieldI.getText())) {
+					if(Integer.valueOf(textFieldI.getText()) > 0) {
+						textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) - 1));
+						percuter();
+					}
+					else {
+						bouttonGB.disable();
+					}
 				}
 				else {
 					bouttonGB.disable();
@@ -199,9 +217,14 @@ public class AppliString {
 		bouttonDH.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//---------------------------------------------
-				if(Integer.valueOf(textFieldJ.getText()) < chaine1.getText().length()) {
-					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) + 1));
-					percuter();
+				if(estEntier(textFieldJ.getText())) {
+					if(Integer.valueOf(textFieldJ.getText()) < chaine1.getText().length()) {
+						textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) + 1));
+						percuter();
+					}
+					else {
+						bouttonDH.disable();
+					}
 				}
 				else {
 					bouttonDH.disable();
@@ -212,10 +235,13 @@ public class AppliString {
 		panelJ.add(bouttonDH);
 		
 		textFieldJ = new JTextField();
+		textFieldJ.setText("0");
 		textFieldJ.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//----------------------------------------------
-				textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				if(estEntier(textFieldJ.getText())) {
+					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				}
 				percuter();
 				//----------------------------------------------
 			}
@@ -229,9 +255,14 @@ public class AppliString {
 		bouttonDB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//--------------------------------------------
-				if(Integer.valueOf(textFieldJ.getText()) > 0) {
-					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) -1 ));
-					percuter();
+				if(estEntier(textFieldJ.getText())) {
+					if(Integer.valueOf(textFieldJ.getText()) > 0) {
+						textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) -1 ));
+						percuter();
+					}
+					else {
+						bouttonDB.disable();
+					}
 				}
 				else {
 					bouttonDB.disable();
