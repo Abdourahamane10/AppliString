@@ -28,7 +28,8 @@ public class AppliString {
 	private JTextField chaine3;
 	
 	private String s;
-	int i,j;
+	private int i;
+	private int j;
 
 	/**
 	 * Launch the application.
@@ -51,6 +52,46 @@ public class AppliString {
 	 */
 	public AppliString() {
 		initialize();
+	}
+	
+	
+	//Méthode pour vérifier si la valeur d'un string est un entier
+	private boolean verifEntier(String s) {
+		int i = 0;
+		while(i != s.length() && Character.isDigit(s.charAt(i))) {
+			i += 1;
+		}
+		if(i == s.length() && Character.isDigit(s.charAt(i-1))) {
+			return true;
+		}
+		return false;
+	}
+	
+	//Méthode permettant de répercuter sur la partie Résultats les modifications efectuées par l'utilisateur sur i, j ou s
+	private void percuter() {
+		s = chaine1.getText();
+		if(verifEntier(textFieldI.getText())) {
+			i = Integer.valueOf(textFieldI.getText());
+		}
+		if(verifEntier(textFieldJ.getText())) {
+			j = Integer.valueOf(textFieldJ.getText());
+		}
+		if(0<=i && i<=s.length()) {
+			u.setText(""+s.charAt(i));
+			chaine2.setText(s.substring(i));
+		}
+		else {
+			u.setText("N/A");
+			chaine2.setText("N/A");
+		}
+		
+		if(0<=i && i<=j && j<=s.length()) {
+			chaine3.setText(s.substring(i, j));
+		}
+		else {
+			chaine3.setText("N/A");
+		}
+		
 	}
 
 	/**
@@ -87,9 +128,9 @@ public class AppliString {
 		panelCB.add(panel1);
 		panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel i = new JLabel("int i = ");
-		i.setFont(new Font("Tahoma", Font.BOLD, 12));
-		panel1.add(i);
+		JLabel labelI = new JLabel("int i = ");
+		labelI.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel1.add(labelI);
 		
 		JPanel panelI = new JPanel();
 		panel1.add(panelI);
@@ -101,6 +142,7 @@ public class AppliString {
 				//-------------------------------------------------
 				if(Integer.valueOf(textFieldI.getText()) < chaine1.getText().length()) {
 					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) + 1));
+					percuter();
 				}
 				else {
 					bouttonGH.disable();
@@ -113,14 +155,14 @@ public class AppliString {
 		textFieldI = new JTextField();
 		textFieldI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//--------------------------------------
-				textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText())));
-				//--------------------------------------
+				//----------------------------------------
+				textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				percuter();
+				//----------------------------------------
 			}
 		});
 		textFieldI.setFont(new Font("Tahoma", Font.BOLD, 12));
 		textFieldI.setHorizontalAlignment(SwingConstants.RIGHT);
-		textFieldI.setText("0");
 		panelI.add(textFieldI);
 		textFieldI.setColumns(10);
 		
@@ -130,6 +172,7 @@ public class AppliString {
 				//--------------------------------------------
 				if(Integer.valueOf(textFieldI.getText()) > 0) {
 					textFieldI.setText(String.valueOf(Integer.valueOf(textFieldI.getText()) - 1));
+					percuter();
 				}
 				else {
 					bouttonGB.disable();
@@ -144,9 +187,9 @@ public class AppliString {
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panelCB.add(panel2);
 		
-		JLabel j = new JLabel("int j = ");
-		j.setFont(new Font("Tahoma", Font.BOLD, 12));
-		panel2.add(j);
+		JLabel labelJ = new JLabel("int j = ");
+		labelJ.setFont(new Font("Tahoma", Font.BOLD, 12));
+		panel2.add(labelJ);
 		
 		JPanel panelJ = new JPanel();
 		panel2.add(panelJ);
@@ -158,6 +201,7 @@ public class AppliString {
 				//---------------------------------------------
 				if(Integer.valueOf(textFieldJ.getText()) < chaine1.getText().length()) {
 					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) + 1));
+					percuter();
 				}
 				else {
 					bouttonDH.disable();
@@ -172,12 +216,12 @@ public class AppliString {
 			public void actionPerformed(ActionEvent e) {
 				//----------------------------------------------
 				textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText())));
+				percuter();
 				//----------------------------------------------
 			}
 		});
 		textFieldJ.setFont(new Font("Tahoma", Font.BOLD, 12));
 		textFieldJ.setHorizontalAlignment(SwingConstants.RIGHT);
-		textFieldJ.setText("9");
 		panelJ.add(textFieldJ);
 		textFieldJ.setColumns(10);
 		
@@ -187,6 +231,7 @@ public class AppliString {
 				//--------------------------------------------
 				if(Integer.valueOf(textFieldJ.getText()) > 0) {
 					textFieldJ.setText(String.valueOf(Integer.valueOf(textFieldJ.getText()) -1 ));
+					percuter();
 				}
 				else {
 					bouttonDB.disable();
@@ -218,7 +263,6 @@ public class AppliString {
 		
 		u = new JTextField();
 		u.setEditable(false);
-		u.setText("U");
 		panelBC1.add(u, BorderLayout.CENTER);
 		u.setColumns(10);
 		
@@ -231,7 +275,6 @@ public class AppliString {
 		
 		chaine2 = new JTextField();
 		chaine2.setEditable(false);
-		chaine2.setText("Un exemple de cha\u00EEne");
 		panelBC2.add(chaine2, BorderLayout.CENTER);
 		chaine2.setColumns(10);
 		
@@ -244,7 +287,6 @@ public class AppliString {
 		
 		chaine3 = new JTextField();
 		chaine3.setEditable(false);
-		chaine3.setText("Un exempl");
 		panelBB.add(chaine3, BorderLayout.CENTER);
 		chaine3.setColumns(10);
 		
@@ -270,11 +312,11 @@ public class AppliString {
 		chaine1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//--------------------------------------------
-				chaine1.setText(String.valueOf(Integer.valueOf(chaine1.getText())));
+				chaine1.setText(String.valueOf(chaine1.getText()));
+				percuter();
 				//--------------------------------------------
 			}
 		});
-		chaine1.setText("Un exemple de cha\u00EEne");
 		panelB.add(chaine1);
 		chaine1.setColumns(10);
 		
